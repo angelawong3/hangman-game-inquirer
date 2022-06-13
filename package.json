@@ -1,0 +1,23 @@
+{
+  "name": "hangman-game-inquirer",
+  "version": "1.0.0",
+  "description": "A CLI word game using inquirer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelawong3/hangman-game-inquirer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angelawong3/hangman-game-inquirer/issues"
+  },
+  "homepage": "https://github.com/angelawong3/hangman-game-inquirer#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
