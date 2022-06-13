@@ -18,9 +18,9 @@ const gameSettingQuestions = [
     message: ({ name }) => `${name} Please choose a category:`,
     choices: [
       {
-        name: "Movies",
-        value: "movies",
-        short: "Movies",
+        name: "Movie",
+        value: "movie",
+        short: "Movie",
       },
       {
         name: "Food",
