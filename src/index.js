@@ -1,24 +1,13 @@
 // inquirer package
 const inquirer = require("inquirer");
-const fs = require("fs");
-const path = require("path");
 
 // import questions
 const { gameSettingQuestions } = require("./questions");
-
-const getCategoryFromFile = (category) => {
-  // buile the file path
-  const fileName = `${category}.json`;
-  const filePath = path.join(__dirname, "data", fileName);
-
-  // read from file using file path
-  const rawData = fs.readFileSync(filePath, "utf-8");
-
-  const parsedData = JSON.parse(rawData);
-
-  // return data from file
-  return parsedData;
-};
+// import category and level
+const {
+  getCategoryFromFile,
+  getRandomWordFromList,
+} = require("./utils/gameSettings");
 
 const init = async () => {
   // prompt the game setting question and store answers
@@ -35,6 +24,10 @@ const init = async () => {
 
   console.log(categoryDataFromFile);
   console.log(wordList);
+
+  // pick a random word form word list
+  const word = getRandomWordFromList(wordList);
+  console.log(word);
 };
 
 init();
