@@ -1,0 +1,5 @@
+{
+  "easy": ["Alien", "Psycho", "Whiplash"],
+  "medium": ["The Godfather", "Star Wars", "Toy Story"],
+  "Hard": ["City of God", "Saving Private Ryan", "The Lion King"]
+}
