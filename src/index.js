@@ -6,16 +6,18 @@ const path = require("path");
 // import questions
 const { gameSettingQuestions } = require("./questions");
 
-const getWordListByCategory = (category) => {
+const getCategoryFromFile = (category) => {
   // buile the file path
   const fileName = `${category}.json`;
   const filePath = path.join(__dirname, "data", fileName);
 
   // read from file using file path
-  const data = fs.readFileSync(filePath, "utf-8");
+  const rawData = fs.readFileSync(filePath, "utf-8");
+
+  const parsedData = JSON.parse(rawData);
 
   // return data from file
-  return data;
+  return parsedData;
 };
 
 const init = async () => {
@@ -26,8 +28,12 @@ const init = async () => {
   console.log(answers);
 
   // ask the catergory and console log the data from the chosen category
-  const wordList = getWordListByCategory(answers.category);
+  const categoryDataFromFile = getCategoryFromFile(answers.category);
 
+  //   extract the level from categoryDataFromFile
+  const wordList = categoryDataFromFile[answers.level];
+
+  console.log(categoryDataFromFile);
   console.log(wordList);
 };
 
