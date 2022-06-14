@@ -8,18 +8,8 @@ const {
   getCategoryFromFile,
   getRandomWordFromList,
 } = require("./utils/gameSettings");
-
-const maskWord = (word) => word.replace(/[a-z]/gi, "_");
-
-const displayWord = (word) => {
-  console.log(`Your word: ${word}`);
-};
-
-const displayInitialHealth = (attempts = 10) => {
-  const healthArray = new Array(attempts).fill("💛");
-
-  console.log(healthArray.join(""));
-};
+// import game for word and attempts
+const { initGame } = require("./utils/game");
 
 const init = async () => {
   // prompt the game setting question and store answers
@@ -34,13 +24,8 @@ const init = async () => {
   // pick a random word form word list
   const word = getRandomWordFromList(wordList);
 
-  //   mask word and log masked letters
-  const maskedWord = maskWord(word);
-
-  displayWord(maskedWord);
-
-  // display initial health
-  displayInitialHealth();
+  // initalize the game for word
+  initGame(word);
 };
 
 init();
