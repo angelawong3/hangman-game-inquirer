@@ -27,12 +27,12 @@ const init = async () => {
   // initalize the game for word
   initGame(word);
 
+  // declare letters array to track letter from user
+  const letters = [];
+  const gameHistory = [];
   let inProgress = true;
   let remainingAttempts = 10;
   let gameStatus = "You Lose :(";
-
-  // declare letters array to track letter from user
-  const letters = [];
 
   while (inProgress) {
     // get game question
@@ -59,6 +59,11 @@ const init = async () => {
     // display remaining attempts
     displayHealth(remainingAttempts);
 
+    gameHistory.push({
+      letter,
+      word: newWord,
+    });
+
     // check if new word = word
     if (word.toLowerCase() === newWord || remainingAttempts === 0) {
       if (word.toLowerCase() === newWord) {
@@ -69,6 +74,7 @@ const init = async () => {
     }
   }
   console.log(`Game Status :${gameStatus}`);
+  console.log(gameHistory);
 };
 
 init();
