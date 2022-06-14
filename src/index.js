@@ -9,7 +9,24 @@ const {
   getRandomWordFromList,
 } = require("./utils/gameSettings");
 // import game for word and attempts
-const { initGame } = require("./utils/game");
+const { initGame, displayWord, displayHealth } = require("./utils/game");
+
+// [`e`,`x`]
+// t
+const play = (letters, word) =>
+  [...word.toLowerCase()]
+    .map((letterFromWord) => {
+      if (letterFromWord === " ") {
+        return letterFromWord;
+      }
+
+      if (!letters.includes(letterFromWord)) {
+        return "_";
+      }
+
+      return letterFromWord;
+    })
+    .join("");
 
 const init = async () => {
   // prompt the game setting question and store answers
@@ -27,13 +44,34 @@ const init = async () => {
   // initalize the game for word
   initGame(word);
 
-  // get game question
-  const gameQuestion = generateGameQuestion(answers.gameMode, answers.name);
+  let counter = 3;
 
-  //   prompt game question
-  const gameAnswer = await inquirer.prompt(gameQuestion);
+  // declare letters array to track letter from user
+  const letters = [];
 
-  console.log(gameAnswer);
+  while (counter > 0) {
+    // get game question
+    const gameQuestion = generateGameQuestion(answers.gameMode, answers.name);
+
+    // prompt game question
+    const { letter } = await inquirer.prompt(gameQuestion);
+
+    console.log(letter);
+
+    letters.push(letter);
+
+    // play game for ltter entered by user
+    const newWord = play(letters, word);
+
+    // display the word
+    displayWord(newWord);
+
+    // display remaining attempts
+    displayHealth(9);
+
+    counter -= 1;
+  }
+  console.log("END");
 };
 
 init();
