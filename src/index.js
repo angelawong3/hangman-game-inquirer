@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 
 // import questions
-const { gameSettingQuestions } = require("./questions");
+const { gameSettingQuestions, generateGameQuestion } = require("./questions");
 // import category and level
 const {
   getCategoryFromFile,
@@ -26,6 +26,14 @@ const init = async () => {
 
   // initalize the game for word
   initGame(word);
+
+  // get game question
+  const gameQuestion = generateGameQuestion(answers.gameMode, answers.name);
+
+  //   prompt game question
+  const gameAnswer = await inquirer.prompt(gameQuestion);
+
+  console.log(gameAnswer);
 };
 
 init();

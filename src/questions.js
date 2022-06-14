@@ -78,6 +78,24 @@ const gameSettingQuestions = [
   },
 ];
 
+const generateGameQuestion = (gameMode, name) => {
+  if (gameMode === "input") {
+    return {
+      type: "input",
+      message: "Please enter a letter from a-z",
+      name: "letter",
+    };
+  }
+  return {
+    type: "list",
+    message: "Please select a letter:",
+    name: "letter",
+    choices: [..."abcdefghijklmnopqrstuvwyz"],
+    // or choices: "abcdefghijklmnopqrstuvwyz".split(""),
+  };
+};
+
 module.exports = {
   gameSettingQuestions,
+  generateGameQuestion,
 };
