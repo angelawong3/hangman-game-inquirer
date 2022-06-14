@@ -9,24 +9,7 @@ const {
   getRandomWordFromList,
 } = require("./utils/gameSettings");
 // import game for word and attempts
-const { initGame, displayWord, displayHealth } = require("./utils/game");
-
-// [`e`,`x`]
-// t
-const play = (letters, word) =>
-  [...word.toLowerCase()]
-    .map((letterFromWord) => {
-      if (letterFromWord === " ") {
-        return letterFromWord;
-      }
-
-      if (!letters.includes(letterFromWord)) {
-        return "_";
-      }
-
-      return letterFromWord;
-    })
-    .join("");
+const { initGame, displayWord, displayHealth, play } = require("./utils/game");
 
 const init = async () => {
   // prompt the game setting question and store answers
@@ -44,17 +27,24 @@ const init = async () => {
   // initalize the game for word
   initGame(word);
 
-  let counter = 3;
+  let inProgress = true;
+  let remainingAttempts = 10;
+  let gameStatus = "You Lose :(";
 
   // declare letters array to track letter from user
   const letters = [];
 
-  while (counter > 0) {
+  while (inProgress) {
     // get game question
     const gameQuestion = generateGameQuestion(answers.gameMode, answers.name);
 
     // prompt game question
     const { letter } = await inquirer.prompt(gameQuestion);
+
+    if (!word.includes(letter)) {
+      // reduce attempts
+      remainingAttempts -= 1;
+    }
 
     console.log(letter);
 
@@ -67,11 +57,18 @@ const init = async () => {
     displayWord(newWord);
 
     // display remaining attempts
-    displayHealth(9);
+    displayHealth(remainingAttempts);
 
-    counter -= 1;
+    // check if new word = word
+    if (word.toLowerCase() === newWord || remainingAttempts === 0) {
+      if (word.toLowerCase() === newWord) {
+        gameStatus = "You Win! :)";
+      } else {
+      }
+      inProgress = false;
+    }
   }
-  console.log("END");
+  console.log(`Game Status :${gameStatus}`);
 };
 
 init();

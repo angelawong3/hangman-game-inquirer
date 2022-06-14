@@ -20,8 +20,26 @@ const initGame = (word) => {
   displayHealth();
 };
 
+// [`e`,`x`]
+// t
+const play = (letters, word) =>
+  [...word.toLowerCase()]
+    .map((letterFromWord) => {
+      if (letterFromWord === " ") {
+        return letterFromWord;
+      }
+
+      if (!letters.includes(letterFromWord)) {
+        return "_";
+      }
+
+      return letterFromWord;
+    })
+    .join("");
+
 module.exports = {
   initGame,
   displayWord,
   displayHealth,
+  play,
 };
